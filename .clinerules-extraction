@@ -1,0 +1,149 @@
+# Extraction from given RFCs
+
+NOTE THAT:
+   - Divide user task into several mini tasks, focus on only one mini task at a time when extracting information. 
+   - Analyse user's requirement and choose proper format template.
+   - Check out the correctness of the extracted information.
+
+## Fields
+
+CRITICAL: Create a .xml file to save structured protocol fields information, in the name of `<protoal>_fields_constraint.xml`, etc. `BGP_fields_constraint.xml`.
+
+### Overall Structure
+`
+<package_fromat>
+   <field_constraint>
+      <!-- 字段元信息 -->
+      <field_identity>
+         <field_name>...</field_name>   <!-- 字段名称 -->
+         <location>...</location>   <!-- HEADER或者BODY -->
+         <message_type>...</message_type>   <!-- 消息类型 -->
+         <rfc_doc>
+            <version>...</version>   <!-- 协议版本，如BGPv4 -->
+            <base>...</base>   <!-- 字段第一次出现的rfc文档 -->
+            <section>...</section>   <!-- 字段在rfc文档中的章节 -->
+            <extension>...</extension>   <!-- 字段在哪些rfc中得到扩展[Optional] -->
+         </rfc_doc>
+      </field_identity>
+      <!-- 约束结构 -->
+      <constraints>
+         <presence>
+            <required>...</required>   <!-- 如MUST -->
+            <description>...</description>
+         </presence>
+         <!-- 语法层 -->
+         <syntax>...</syntax>
+         <!-- 语义层 -->      
+         <semantics>...</semantics>
+         <!-- 状态机层[Optional] -->
+         <state_transitions>
+            <transition from="..." to="..."/>   <!-- 状态转移 -->
+         </state_transitions> 
+      </constraints>
+      <!-- 错误处理 -->
+      <error_handling>...</error_handling>
+      <!-- 依赖关系 -->
+      <relationships>...</relationships>
+      <!-- 结构化的规则 -->
+      <rules>...</rules>
+   </field_constraint>
+</package_fromat>
+`
+Extracting meta information first, and convert all information into rules at last.
+
+#### constraint type evolves
+
+The constraints on fields may change as the RFC document evolves; some fields may be added, and some may be deprecated. You have to embody this change like this:
+   - <constraint type="added" since="rfc...">...</constraint>   <!-- 新增约束 -->
+   - <constraint type="deprecated" since="rfc...">...</constraint>   <!-- 废弃约束 -->
+   - <constraint type="changed" since="rfc...">...</constraint>   <!-- 约束改变 -->
+
+#### syntax general structure
+
+##### with defalut value
+`
+<syntax>
+   <length>...</length>   <!-- 字段长度，单位为OCTET -->
+   <value_type>...</value_type>   <!-- 字段值类型，如INTEGER、BINARY等 -->
+   <default_value>...</default_value>   <!-- 字段默认值，如果是BINARY用十六进制0x...表示 -->
+   <exception>   <!-- 异常情况[Optional] -->
+      <condition>...</condition>   <!-- 什么情况下默认值会发生改变 -->
+      <value_type>...</value_type>   <!-- 改变后的值类型[Optional] -->
+      <new_value>...</new_value>   <!-- 改变后的值[Optional] -->
+      <rfc_reference>...</rfc_reference>   <!-- 相关rfc文档 -->
+   </exception>
+</syntax>
+`
+
+##### with range value
+`
+<syntax>
+   <length>...</length>
+   <value_type>...</value_type>
+   <range>   <!-- 字段的取值是一个范围 -->
+      <min>...</min>
+      <max>...</max>
+      <exception>...</exception>
+   </range>
+</syntax>
+`
+##### with enumerated value
+`
+<syntax>
+   <length>...</length>
+   <value_type>...</value_type>
+   <enumeration>
+      <entry code="...">...</entry>   <!-- 枚举值，比如<entry code="1">OPEN</entry> -->
+      <entry code="...">...</entry>
+      <reserved_range>...</reserved_range>   <!-- 保留的范围[Optional] -->
+   </enumeration>
+</syntax>
+`
+
+#### Error Handling
+`
+<error_handling> <!-- 错误处理[Optional] -->
+   <invalid_code>
+      <action>...</action>   <!-- 错误处理方式 -->
+      <subcode>1</subcode> <!-- 错误码 -->
+   </invalid_code>
+</error_handling>
+`
+
+#### Relationships
+`
+<relationships>
+   <depends_on>   <!-- 依赖关系[Optional] -->
+      <field>...</field>   <!-- 依赖的字段 -->
+      <description>...</description>   <!-- 依赖说明 -->
+   </depends_on>
+   <conflicts_with>   <!-- 冲突关系[Optional] -->
+      <condition>...</condition>   <!-- 冲突条件 -->
+      <description>...</description>   <!-- 冲突说明 -->
+   </conflicts_with>
+  </relationships>
+`
+
+#### Rules
+`
+<rules>
+   <chk_bf>...</chk_bf>   <!-- 检查规则 -->
+</rules>
+`
+According to specific field's constraints, you can extract rules from them. The rule means that before entrying a field, you should check if the field meets the conditions.
+Some examples:
+   - <chk_bf>len(Marker) == 16, use(Marker)</chk_bf>
+   - <chk_bf>len(Marker) == 16, use(Marker)</chk_bf>
+   - <chk_bf>Length >= 19 && Length <= 4096, use(Length)</chk_bf>
+   - <chk_bf>Version == 4, use(Version)</chk_bf>
+These rules will then be subjected to constraint solving.
+
+## State Machine
+
+CRITICAL: Create a .mmd (mermaid) file to save state machine transition graph, in the name of `<protoal>_state_machine.mmd`, etc. `BGP_state_machine.mmd`.
+
+## Algorithms
+
+Some rfc documents may contain some algorithms. For example, the rfc 4271 contains some algorithms in `9.1.2.2.  Breaking Ties (Phase 2)`.
+You can anaylse these algorithms and extract them into a persudocode format.
+CRITICAL: Create a .md file to save persudocode algorithms, in the name of `<protoal>_algorithms.md`, etc. `BGP_algorithms.md`.
