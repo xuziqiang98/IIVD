@@ -322,7 +322,7 @@ export class Cline {
 	): Promise<{ response: ClineAskResponse; text?: string; images?: string[] }> {
 		// If this Cline instance was aborted by the provider, then the only thing keeping us alive is a promise still running in the background, in which case we don't want to send its result to the webview as it is attached to a new instance of Cline now. So we can safely ignore the result of any active promises, and this class will be deallocated. (Although we set Cline = undefined in provider, that simply removes the reference to this instance, but the instance is still alive until this promise resolves or rejects.)
 		if (this.abort) {
-			throw new Error("Roo Code instance aborted")
+			throw new Error("IIVD instance aborted")
 		}
 		let askTs: number
 		if (partial !== undefined) {
@@ -424,7 +424,7 @@ export class Cline {
 		checkpoint?: Record<string, unknown>,
 	): Promise<undefined> {
 		if (this.abort) {
-			throw new Error("Roo Code instance aborted")
+			throw new Error("IIVD instance aborted")
 		}
 
 		if (partial !== undefined) {
@@ -483,7 +483,7 @@ export class Cline {
 	async sayAndCreateMissingParamError(toolName: ToolUseName, paramName: string, relPath?: string) {
 		await this.say(
 			"error",
-			`Roo tried to use ${toolName}${
+			`IIVD tried to use ${toolName}${
 				relPath ? ` for '${relPath.toPosix()}'` : ""
 			} without value for required parameter '${paramName}'. Retrying...`,
 		)
@@ -1090,7 +1090,7 @@ export class Cline {
 
 	async presentAssistantMessage() {
 		if (this.abort) {
-			throw new Error("Roo Code instance aborted")
+			throw new Error("IIVD instance aborted")
 		}
 
 		if (this.presentAssistantMessageLocked) {
@@ -2358,7 +2358,7 @@ export class Cline {
 										this.consecutiveMistakeCount++
 										await this.say(
 											"error",
-											`Roo tried to use ${tool_name} with an invalid JSON argument. Retrying...`,
+											`IIVD tried to use ${tool_name} with an invalid JSON argument. Retrying...`,
 										)
 										pushToolResult(
 											formatResponse.toolError(
@@ -2811,7 +2811,7 @@ export class Cline {
 		includeFileDetails: boolean = false,
 	): Promise<boolean> {
 		if (this.abort) {
-			throw new Error("Roo Code instance aborted")
+			throw new Error("IIVD instance aborted")
 		}
 
 		if (this.consecutiveMistakeCount >= 3) {
@@ -2819,7 +2819,7 @@ export class Cline {
 				"mistake_limit_reached",
 				this.api.getModel().id.includes("claude")
 					? `This may indicate a failure in his thought process or inability to use a tool properly, which can be mitigated with some user guidance (e.g. "Try breaking down the task into smaller steps").`
-					: "Roo Code uses complex prompts and iterative task execution that may be challenging for less capable models. For best results, it's recommended to use Claude 3.7 Sonnet for its advanced agentic coding capabilities.",
+					: "IIVD uses complex prompts and iterative task execution that may be challenging for less capable models. For best results, it's recommended to use Claude 3.7 Sonnet for its advanced agentic coding capabilities.",
 			)
 			if (response === "messageResponse") {
 				userContent.push(
@@ -3034,7 +3034,7 @@ export class Cline {
 
 			// need to call here in case the stream was aborted
 			if (this.abort || this.abandoned) {
-				throw new Error("Roo Code instance aborted")
+				throw new Error("IIVD instance aborted")
 			}
 
 			this.didCompleteReadingStream = true

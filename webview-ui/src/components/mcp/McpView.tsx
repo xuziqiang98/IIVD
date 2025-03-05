@@ -63,11 +63,11 @@ const McpView = ({ onDone }: McpViewProps) => {
 						Model Context Protocol
 					</VSCodeLink>{" "}
 					enables communication with locally running MCP servers that provide additional tools and resources
-					to extend Roo's capabilities. You can use{" "}
+					to extend IIVD's capabilities. You can use{" "}
 					<VSCodeLink href="https://github.com/modelcontextprotocol/servers" style={{ display: "inline" }}>
 						community-made servers
 					</VSCodeLink>{" "}
-					or ask Roo to create new tools specific to your workflow (e.g., "add a tool that gets the latest npm
+					or ask IIVD to create new tools specific to your workflow (e.g., "add a tool that gets the latest npm
 					docs").
 				</div>
 
@@ -90,8 +90,8 @@ const McpView = ({ onDone }: McpViewProps) => {
 									marginTop: "5px",
 									color: "var(--vscode-descriptionForeground)",
 								}}>
-								When enabled, Roo can help you create new MCP servers via commands like "add a new tool
-								to...". If you don't need to create MCP servers you can disable this to reduce Roo's
+								When enabled, IIVD can help you create new MCP servers via commands like "add a new tool
+								to...". If you don't need to create MCP servers you can disable this to reduce IIVD's
 								token usage.
 							</p>
 						</div>

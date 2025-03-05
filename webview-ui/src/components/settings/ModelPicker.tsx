@@ -102,7 +102,7 @@ export const ModelPicker = ({
 				<VSCodeLink style={{ display: "inline", fontSize: "inherit" }} href={serviceUrl}>
 					{serviceName}.
 				</VSCodeLink>
-				If you're unsure which model to choose, Roo Code works best with{" "}
+				If you're unsure which model to choose, IIVD works best with{" "}
 				<VSCodeLink onClick={() => onSelect(defaultModelId)}>{defaultModelId}.</VSCodeLink>
 				You can also try searching "free" for no-cost options currently available.
 			</p>

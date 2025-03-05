@@ -183,7 +183,7 @@ describe("ConfigManager", () => {
 			}
 
 			expect(mockSecrets.store).toHaveBeenCalledWith(
-				"roo_cline_config_api_config",
+				"iivd_config_api_config",
 				JSON.stringify(expectedConfig, null, 2),
 			)
 		})
@@ -221,7 +221,7 @@ describe("ConfigManager", () => {
 			}
 
 			expect(mockSecrets.store).toHaveBeenCalledWith(
-				"roo_cline_config_api_config",
+				"iivd_config_api_config",
 				JSON.stringify(expectedConfig, null, 2),
 			)
 		})
@@ -444,7 +444,7 @@ describe("ConfigManager", () => {
 			await configManager.resetAllConfigs()
 
 			// Should have called delete with the correct config key
-			expect(mockSecrets.delete).toHaveBeenCalledWith("roo_cline_config_api_config")
+			expect(mockSecrets.delete).toHaveBeenCalledWith("iivd_config_api_config")
 		})
 	})
 

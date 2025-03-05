@@ -497,7 +497,7 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 							</PopoverContent>
 						</Popover>
 						<p className="text-xs mt-1.5 text-vscode-descriptionForeground">
-							Select the language that Roo should use for communication.
+							Select the language that IIVD should use for communication.
 						</p>
 					</div>
 
@@ -589,7 +589,7 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 												e.preventDefault() // Prevent blur
 												vscode.postMessage({
 													type: "openFile",
-													text: "./.roomodes",
+													text: "./.iivdmodes",
 													values: {
 														create: true,
 														content: JSON.stringify({ customModes: [] }, null, 2),
@@ -598,7 +598,7 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 												setShowConfigMenu(false)
 											}}
 											onClick={(e) => e.preventDefault()}>
-											Edit Project Modes (.roomodes)
+											Edit Project Modes (.iivdmodes)
 										</div>
 									</div>
 								)}
@@ -607,7 +607,7 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 					</div>
 
 					<div className="text-sm text-vscode-descriptionForeground mb-3">
-						Hit the + to create a new custom mode, or just ask Roo in chat to create one for you!
+						Hit the + to create a new custom mode, or just ask IIVD in chat to create one for you!
 					</div>
 
 					<div className="flex gap-2 items-center mb-3 flex-wrap py-1">
@@ -689,7 +689,7 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 							)}
 						</div>
 						<div className="text-sm text-vscode-descriptionForeground mb-2">
-							Define Roo's expertise and personality for this mode. This description shapes how Roo
+							Define IIVD's expertise and personality for this mode. This description shapes how IIVD
 							presents itself and approaches tasks.
 						</div>
 						<VSCodeTextArea
@@ -997,14 +997,14 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 										// Open or create an empty file
 										vscode.postMessage({
 											type: "openFile",
-											text: `./.roo/system-prompt-${currentMode.slug}`,
+											text: `./.iivd/system-prompt-${currentMode.slug}`,
 											values: {
 												create: true,
 												content: "",
 											},
 										})
 									}}>
-									.roo/system-prompt-{getCurrentMode()?.slug || "code"}
+									.iivd/system-prompt-{getCurrentMode()?.slug || "code"}
 								</span>{" "}
 								in your workspace. This is a very advanced feature that bypasses built-in safeguards and
 								consistency checks (especially around tool usage), so be careful!
@@ -1279,7 +1279,7 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 										</div>
 									</VSCodeRadio>
 									<VSCodeRadio value="project">
-										Project-specific (.roomodes)
+										Project-specific (.iivdmodes)
 										<div className="text-xs text-vscode-descriptionForeground mt-0.5">
 											Only available in this workspace, takes precedence over global
 										</div>
@@ -1295,7 +1295,7 @@ const PromptsView = ({ onDone }: PromptsViewProps) => {
 										color: "var(--vscode-descriptionForeground)",
 										marginBottom: "8px",
 									}}>
-									Define Roo's expertise and personality for this mode.
+									Define IIVD's expertise and personality for this mode.
 								</div>
 								<VSCodeTextArea
 									value={newModeRoleDefinition}

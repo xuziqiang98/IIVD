@@ -7,7 +7,7 @@ import { fileExistsAtPath } from "../../utils/fs"
 import { arePathsEqual } from "../../utils/path"
 import { logger } from "../../utils/logging"
 
-const ROOMODES_FILENAME = ".roomodes"
+const IIVDMODES_FILENAME = ".iivdmodes"
 
 export class CustomModesManager {
 	private disposables: vscode.Disposable[] = []
@@ -46,15 +46,15 @@ export class CustomModesManager {
 		}
 	}
 
-	private async getWorkspaceRoomodes(): Promise<string | undefined> {
+	private async getWorkspaceIIVDmodes(): Promise<string | undefined> {
 		const workspaceFolders = vscode.workspace.workspaceFolders
 		if (!workspaceFolders || workspaceFolders.length === 0) {
 			return undefined
 		}
 		const workspaceRoot = workspaceFolders[0].uri.fsPath
-		const roomodesPath = path.join(workspaceRoot, ROOMODES_FILENAME)
-		const exists = await fileExistsAtPath(roomodesPath)
-		return exists ? roomodesPath : undefined
+		const iivdmodesPath = path.join(workspaceRoot, IIVDMODES_FILENAME)
+		const exists = await fileExistsAtPath(iivdmodesPath)
+		return exists ? iivdmodesPath : undefined
 	}
 
 	private async loadModesFromFile(filePath: string): Promise<ModeConfig[]> {
@@ -67,8 +67,8 @@ export class CustomModesManager {
 			}
 
 			// Determine source based on file path
-			const isRoomodes = filePath.endsWith(ROOMODES_FILENAME)
-			const source = isRoomodes ? ("project" as const) : ("global" as const)
+			const isIIVDmodes = filePath.endsWith(IIVDMODES_FILENAME)
+			const source = isIIVDmodes ? ("project" as const) : ("global" as const)
 
 			// Add source to each mode
 			return result.data.customModes.map((mode) => ({
@@ -149,28 +149,28 @@ export class CustomModesManager {
 						return
 					}
 
-					// Get modes from .roomodes if it exists (takes precedence)
-					const roomodesPath = await this.getWorkspaceRoomodes()
-					const roomodesModes = roomodesPath ? await this.loadModesFromFile(roomodesPath) : []
+					// Get modes from .iivdmodes if it exists (takes precedence)
+					const iivdmodesPath = await this.getWorkspaceIIVDmodes()
+					const iivdmodesModes = iivdmodesPath ? await this.loadModesFromFile(iivdmodesPath) : []
 
-					// Merge modes from both sources (.roomodes takes precedence)
-					const mergedModes = await this.mergeCustomModes(roomodesModes, result.data.customModes)
+					// Merge modes from both sources (.iivdmodes takes precedence)
+					const mergedModes = await this.mergeCustomModes(iivdmodesModes, result.data.customModes)
 					await this.context.globalState.update("customModes", mergedModes)
 					await this.onUpdate()
 				}
 			}),
 		)
 
-		// Watch .roomodes file if it exists
-		const roomodesPath = await this.getWorkspaceRoomodes()
-		if (roomodesPath) {
+		// Watch .iivdmodes file if it exists
+		const iivdmodesPath = await this.getWorkspaceIIVDmodes()
+		if (iivdmodesPath) {
 			this.disposables.push(
 				vscode.workspace.onDidSaveTextDocument(async (document) => {
-					if (arePathsEqual(document.uri.fsPath, roomodesPath)) {
+					if (arePathsEqual(document.uri.fsPath, iivdmodesPath)) {
 						const settingsModes = await this.loadModesFromFile(settingsPath)
-						const roomodesModes = await this.loadModesFromFile(roomodesPath)
-						// .roomodes takes precedence
-						const mergedModes = await this.mergeCustomModes(roomodesModes, settingsModes)
+						const iivdmodesModes = await this.loadModesFromFile(iivdmodesPath)
+						// .iivdmodes takes precedence
+						const mergedModes = await this.mergeCustomModes(iivdmodesModes, settingsModes)
 						await this.context.globalState.update("customModes", mergedModes)
 						await this.onUpdate()
 					}
@@ -184,16 +184,16 @@ export class CustomModesManager {
 		const settingsPath = await this.getCustomModesFilePath()
 		const settingsModes = await this.loadModesFromFile(settingsPath)
 
-		// Get modes from .roomodes if it exists
-		const roomodesPath = await this.getWorkspaceRoomodes()
-		const roomodesModes = roomodesPath ? await this.loadModesFromFile(roomodesPath) : []
+		// Get modes from .iivdmodes if it exists
+		const iivdmodesPath = await this.getWorkspaceIIVDmodes()
+		const iivdmodesModes = iivdmodesPath ? await this.loadModesFromFile(iivdmodesPath) : []
 
 		// Create maps to store modes by source
 		const projectModes = new Map<string, ModeConfig>()
 		const globalModes = new Map<string, ModeConfig>()
 
 		// Add project modes (they take precedence)
-		for (const mode of roomodesModes) {
+		for (const mode of iivdmodesModes) {
 			projectModes.set(mode.slug, { ...mode, source: "project" as const })
 		}
 
@@ -206,7 +206,7 @@ export class CustomModesManager {
 
 		// Combine modes in the correct order: project modes first, then global modes
 		const mergedModes = [
-			...roomodesModes.map((mode) => ({ ...mode, source: "project" as const })),
+			...iivdmodesModes.map((mode) => ({ ...mode, source: "project" as const })),
 			...settingsModes
 				.filter((mode) => !projectModes.has(mode.slug))
 				.map((mode) => ({ ...mode, source: "global" as const })),
@@ -227,9 +227,9 @@ export class CustomModesManager {
 					throw new Error("No workspace folder found for project-specific mode")
 				}
 				const workspaceRoot = workspaceFolders[0].uri.fsPath
-				targetPath = path.join(workspaceRoot, ROOMODES_FILENAME)
+				targetPath = path.join(workspaceRoot, IIVDMODES_FILENAME)
 				const exists = await fileExistsAtPath(targetPath)
-				logger.info(`${exists ? "Updating" : "Creating"} project mode in ${ROOMODES_FILENAME}`, {
+				logger.info(`${exists ? "Updating" : "Creating"} project mode in ${IIVDMODES_FILENAME}`, {
 					slug,
 					workspace: workspaceRoot,
 				})
@@ -280,11 +280,11 @@ export class CustomModesManager {
 
 	private async refreshMergedState(): Promise<void> {
 		const settingsPath = await this.getCustomModesFilePath()
-		const roomodesPath = await this.getWorkspaceRoomodes()
+		const iivdmodesPath = await this.getWorkspaceIIVDmodes()
 
 		const settingsModes = await this.loadModesFromFile(settingsPath)
-		const roomodesModes = roomodesPath ? await this.loadModesFromFile(roomodesPath) : []
-		const mergedModes = await this.mergeCustomModes(roomodesModes, settingsModes)
+		const iivdmodesModes = iivdmodesPath ? await this.loadModesFromFile(iivdmodesPath) : []
+		const mergedModes = await this.mergeCustomModes(iivdmodesModes, settingsModes)
 
 		await this.context.globalState.update("customModes", mergedModes)
 		await this.onUpdate()
@@ -293,13 +293,13 @@ export class CustomModesManager {
 	async deleteCustomMode(slug: string): Promise<void> {
 		try {
 			const settingsPath = await this.getCustomModesFilePath()
-			const roomodesPath = await this.getWorkspaceRoomodes()
+			const iivdmodesPath = await this.getWorkspaceIIVDmodes()
 
 			const settingsModes = await this.loadModesFromFile(settingsPath)
-			const roomodesModes = roomodesPath ? await this.loadModesFromFile(roomodesPath) : []
+			const iivdmodesModes = iivdmodesPath ? await this.loadModesFromFile(iivdmodesPath) : []
 
 			// Find the mode in either file
-			const projectMode = roomodesModes.find((m) => m.slug === slug)
+			const projectMode = iivdmodesModes.find((m) => m.slug === slug)
 			const globalMode = settingsModes.find((m) => m.slug === slug)
 
 			if (!projectMode && !globalMode) {
@@ -308,8 +308,8 @@ export class CustomModesManager {
 
 			await this.queueWrite(async () => {
 				// Delete from project first if it exists there
-				if (projectMode && roomodesPath) {
-					await this.updateModesInFile(roomodesPath, (modes) => modes.filter((m) => m.slug !== slug))
+				if (projectMode && iivdmodesPath) {
+					await this.updateModesInFile(iivdmodesPath, (modes) => modes.filter((m) => m.slug !== slug))
 				}
 
 				// Delete from global settings if it exists there

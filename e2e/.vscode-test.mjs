@@ -13,7 +13,7 @@ export default defineConfig({
 		timeout: 60000,
 	},
 	launchArgs: [
-		'--enable-proposed-api=RooVeterinaryInc.roo-cline',
+		'--enable-proposed-api=xuziqiang.iivd',
 		'--disable-extensions'
 	]
 });
