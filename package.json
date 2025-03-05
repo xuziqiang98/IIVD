@@ -1,9 +1,9 @@
 {
-	"name": "roo-cline",
-	"displayName": "Roo Code (prev. Roo Cline)",
-	"description": "A whole dev team of AI agents in your editor.",
-	"publisher": "RooVeterinaryInc",
-	"version": "3.7.8",
+	"name": "iivd",
+	"displayName": "IIVD",
+	"description": "Implementation Inconsistency Vulnerability Detector",
+	"publisher": "xuziqiang",
+	"version": "0.0.1",
 	"icon": "assets/icons/rocket.png",
 	"galleryBanner": {
 		"color": "#617A91",
@@ -13,13 +13,13 @@
 		"vscode": "^1.84.0"
 	},
 	"author": {
-		"name": "Roo Vet"
+		"name": "xuziqiang"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/RooVetGit/Roo-Code"
+		"url": "https://github.com/xuziqiang98/IIVD"
 	},
-	"homepage": "https://github.com/RooVetGit/Roo-Code",
+	"homepage": "https://github.com/xuziqiang98/IIVD",
 	"categories": [
 		"AI",
 		"Chat",
@@ -41,8 +41,7 @@
 		"sonnet",
 		"ai",
 		"llama",
-		"roo code",
-		"roocode"
+		"IIVD"
 	],
 	"activationEvents": [
 		"onLanguage",
@@ -53,195 +52,195 @@
 		"viewsContainers": {
 			"activitybar": [
 				{
-					"id": "roo-cline-ActivityBar",
-					"title": "Roo Code",
+					"id": "iivd-ActivityBar",
+					"title": "IIVD",
 					"icon": "$(rocket)"
 				}
 			]
 		},
 		"views": {
-			"roo-cline-ActivityBar": [
+			"iivd-ActivityBar": [
 				{
 					"type": "webview",
-					"id": "roo-cline.SidebarProvider",
+					"id": "iivd.SidebarProvider",
 					"name": ""
 				}
 			]
 		},
 		"commands": [
 			{
-				"command": "roo-cline.plusButtonClicked",
+				"command": "iivd.plusButtonClicked",
 				"title": "New Task",
 				"icon": "$(add)"
 			},
 			{
-				"command": "roo-cline.mcpButtonClicked",
+				"command": "iivd.mcpButtonClicked",
 				"title": "MCP Servers",
 				"icon": "$(server)"
 			},
 			{
-				"command": "roo-cline.promptsButtonClicked",
+				"command": "iivd.promptsButtonClicked",
 				"title": "Prompts",
 				"icon": "$(notebook)"
 			},
 			{
-				"command": "roo-cline.historyButtonClicked",
+				"command": "iivd.historyButtonClicked",
 				"title": "History",
 				"icon": "$(history)"
 			},
 			{
-				"command": "roo-cline.popoutButtonClicked",
+				"command": "iivd.popoutButtonClicked",
 				"title": "Open in Editor",
 				"icon": "$(link-external)"
 			},
 			{
-				"command": "roo-cline.settingsButtonClicked",
+				"command": "iivd.settingsButtonClicked",
 				"title": "Settings",
 				"icon": "$(settings-gear)"
 			},
 			{
-				"command": "roo-cline.helpButtonClicked",
+				"command": "iivd.helpButtonClicked",
 				"title": "Documentation",
 				"icon": "$(question)"
 			},
 			{
-				"command": "roo-cline.openInNewTab",
+				"command": "iivd.openInNewTab",
 				"title": "Open In New Tab",
-				"category": "Roo Code"
+				"category": "IIVD"
 			},
 			{
-				"command": "roo-cline.explainCode",
-				"title": "Roo Code: Explain Code",
-				"category": "Roo Code"
+				"command": "iivd.explainCode",
+				"title": "IIVD: Explain Code",
+				"category": "IIVD"
 			},
 			{
-				"command": "roo-cline.fixCode",
-				"title": "Roo Code: Fix Code",
-				"category": "Roo Code"
+				"command": "iivd.fixCode",
+				"title": "IIVD: Fix Code",
+				"category": "IIVD"
 			},
 			{
-				"command": "roo-cline.improveCode",
-				"title": "Roo Code: Improve Code",
-				"category": "Roo Code"
+				"command": "iivd.improveCode",
+				"title": "IIVD: Improve Code",
+				"category": "IIVD"
 			},
 			{
-				"command": "roo-cline.addToContext",
-				"title": "Roo Code: Add To Context",
-				"category": "Roo Code"
+				"command": "iivd.addToContext",
+				"title": "IIVD: Add To Context",
+				"category": "IIVD"
 			},
 			{
-				"command": "roo-cline.terminalAddToContext",
-				"title": "Roo Code: Add Terminal Content to Context",
+				"command": "iivd.terminalAddToContext",
+				"title": "IIVD: Add Terminal Content to Context",
 				"category": "Terminal"
 			},
 			{
-				"command": "roo-cline.terminalFixCommand",
-				"title": "Roo Code: Fix This Command",
+				"command": "iivd.terminalFixCommand",
+				"title": "IIVD: Fix This Command",
 				"category": "Terminal"
 			},
 			{
-				"command": "roo-cline.terminalExplainCommand",
-				"title": "Roo Code: Explain This Command",
+				"command": "iivd.terminalExplainCommand",
+				"title": "IIVD: Explain This Command",
 				"category": "Terminal"
 			},
 			{
-				"command": "roo-cline.terminalFixCommandInCurrentTask",
-				"title": "Roo Code: Fix This Command (Current Task)",
+				"command": "iivd.terminalFixCommandInCurrentTask",
+				"title": "IIVD: Fix This Command (Current Task)",
 				"category": "Terminal"
 			},
 			{
-				"command": "roo-cline.terminalExplainCommandInCurrentTask",
-				"title": "Roo Code: Explain This Command (Current Task)",
+				"command": "iivd.terminalExplainCommandInCurrentTask",
+				"title": "IIVD: Explain This Command (Current Task)",
 				"category": "Terminal"
 			}
 		],
 		"menus": {
 			"editor/context": [
 				{
-					"command": "roo-cline.explainCode",
+					"command": "iivd.explainCode",
 					"when": "editorHasSelection",
-					"group": "Roo Code@1"
+					"group": "IIVD@1"
 				},
 				{
-					"command": "roo-cline.fixCode",
+					"command": "iivd.fixCode",
 					"when": "editorHasSelection",
-					"group": "Roo Code@2"
+					"group": "IIVD@2"
 				},
 				{
-					"command": "roo-cline.improveCode",
+					"command": "iivd.improveCode",
 					"when": "editorHasSelection",
-					"group": "Roo Code@3"
+					"group": "IIVD@3"
 				},
 				{
-					"command": "roo-cline.addToContext",
+					"command": "iivd.addToContext",
 					"when": "editorHasSelection",
-					"group": "Roo Code@4"
+					"group": "IIVD@4"
 				}
 			],
 			"terminal/context": [
 				{
-					"command": "roo-cline.terminalAddToContext",
-					"group": "Roo Code@1"
+					"command": "iivd.terminalAddToContext",
+					"group": "IIVD@1"
 				},
 				{
-					"command": "roo-cline.terminalFixCommand",
-					"group": "Roo Code@2"
+					"command": "iivd.terminalFixCommand",
+					"group": "IIVD@2"
 				},
 				{
-					"command": "roo-cline.terminalExplainCommand",
-					"group": "Roo Code@3"
+					"command": "iivd.terminalExplainCommand",
+					"group": "IIVD@3"
 				},
 				{
-					"command": "roo-cline.terminalFixCommandInCurrentTask",
-					"group": "Roo Code@5"
+					"command": "iivd.terminalFixCommandInCurrentTask",
+					"group": "IIVD@5"
 				},
 				{
-					"command": "roo-cline.terminalExplainCommandInCurrentTask",
-					"group": "Roo Code@6"
+					"command": "iivd.terminalExplainCommandInCurrentTask",
+					"group": "IIVD@6"
 				}
 			],
 			"view/title": [
 				{
-					"command": "roo-cline.plusButtonClicked",
+					"command": "iivd.plusButtonClicked",
 					"group": "navigation@1",
-					"when": "view == roo-cline.SidebarProvider"
+					"when": "view == iivd.SidebarProvider"
 				},
 				{
-					"command": "roo-cline.promptsButtonClicked",
+					"command": "iivd.promptsButtonClicked",
 					"group": "navigation@2",
-					"when": "view == roo-cline.SidebarProvider"
+					"when": "view == iivd.SidebarProvider"
 				},
 				{
-					"command": "roo-cline.mcpButtonClicked",
+					"command": "iivd.mcpButtonClicked",
 					"group": "navigation@3",
-					"when": "view == roo-cline.SidebarProvider"
+					"when": "view == iivd.SidebarProvider"
 				},
 				{
-					"command": "roo-cline.historyButtonClicked",
+					"command": "iivd.historyButtonClicked",
 					"group": "navigation@4",
-					"when": "view == roo-cline.SidebarProvider"
+					"when": "view == iivd.SidebarProvider"
 				},
 				{
-					"command": "roo-cline.popoutButtonClicked",
+					"command": "iivd.popoutButtonClicked",
 					"group": "navigation@5",
-					"when": "view == roo-cline.SidebarProvider"
+					"when": "view == iivd.SidebarProvider"
 				},
 				{
-					"command": "roo-cline.settingsButtonClicked",
+					"command": "iivd.settingsButtonClicked",
 					"group": "navigation@6",
-					"when": "view == roo-cline.SidebarProvider"
+					"when": "view == iivd.SidebarProvider"
 				},
 				{
-					"command": "roo-cline.helpButtonClicked",
+					"command": "iivd.helpButtonClicked",
 					"group": "navigation@7",
-					"when": "view == roo-cline.SidebarProvider"
+					"when": "view == iivd.SidebarProvider"
 				}
 			]
 		},
 		"configuration": {
-			"title": "Roo Code",
+			"title": "IIVD",
 			"properties": {
-				"roo-cline.allowedCommands": {
+				"iivd.allowedCommands": {
 					"type": "array",
 					"items": {
 						"type": "string"
@@ -256,7 +255,7 @@
 					],
 					"description": "Commands that can be auto-executed when 'Always approve execute operations' is enabled"
 				},
-				"roo-cline.vsCodeLmModelSelector": {
+				"iivd.vsCodeLmModelSelector": {
 					"type": "object",
 					"properties": {
 						"vendor": {

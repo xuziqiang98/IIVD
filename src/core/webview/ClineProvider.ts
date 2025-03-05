@@ -55,8 +55,8 @@ import { getUri } from "./getUri"
  */
 
 export class ClineProvider implements vscode.WebviewViewProvider {
-	public static readonly sideBarId = "roo-cline.SidebarProvider" // used in package.json as the view's id. This value cannot be changed due to how vscode caches views based on their id, and updating the id would break existing instances of the extension.
-	public static readonly tabPanelId = "roo-cline.TabPanelProvider"
+	public static readonly sideBarId = "iivd.SidebarProvider" // used in package.json as the view's id. This value cannot be changed due to how vscode caches views based on their id, and updating the id would break existing instances of the extension.
+	public static readonly tabPanelId = "iivd.TabPanelProvider"
 	private static activeInstances: Set<ClineProvider> = new Set()
 	private disposables: vscode.Disposable[] = []
 	private view?: vscode.WebviewView | vscode.WebviewPanel
@@ -130,7 +130,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
 
 		// If no visible provider, try to show the sidebar view
 		if (!visibleProvider) {
-			await vscode.commands.executeCommand("roo-cline.SidebarProvider.focus")
+			await vscode.commands.executeCommand("iivd.SidebarProvider.focus")
 			// Wait briefly for the view to become visible
 			await delay(100)
 			visibleProvider = ClineProvider.getVisibleInstance()
@@ -429,7 +429,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
 					<meta http-equiv="Content-Security-Policy" content="${csp.join("; ")}">
 					<link rel="stylesheet" type="text/css" href="${stylesUri}">
 					<link href="${codiconsUri}" rel="stylesheet" />
-					<title>Roo Code</title>
+					<title>IIVD</title>
 				</head>
 				<body>
 					<div id="root"></div>
@@ -504,7 +504,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
             <meta http-equiv="Content-Security-Policy" content="default-src 'none'; font-src ${webview.cspSource}; style-src ${webview.cspSource} 'unsafe-inline'; img-src ${webview.cspSource} data:; script-src 'nonce-${nonce}';">
             <link rel="stylesheet" type="text/css" href="${stylesUri}">
 			<link href="${codiconsUri}" rel="stylesheet" />
-            <title>Roo Code</title>
+            <title>IIVD</title>
           </head>
           <body>
             <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -918,7 +918,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
 						await this.context.globalState.update("allowedCommands", message.commands)
 						// Also update workspace settings
 						await vscode.workspace
-							.getConfiguration("roo-cline")
+							.getConfiguration("iivd")
 							.update("allowedCommands", message.commands, vscode.ConfigurationTarget.Global)
 						break
 					case "openMcpSettings": {
@@ -1945,7 +1945,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
 		// Delete checkpoints branch.
 		if (enableCheckpoints && baseDir) {
 			const branchSummary = await simpleGit(baseDir)
-				.branch(["-D", `roo-code-checkpoints-${id}`])
+				.branch(["-D", `iivd-checkpoints-${id}`])
 				.catch(() => undefined)
 
 			if (branchSummary) {
@@ -2024,7 +2024,7 @@ export class ClineProvider implements vscode.WebviewViewProvider {
 			maxOpenTabsContext,
 		} = await this.getState()
 
-		const allowedCommands = vscode.workspace.getConfiguration("roo-cline").get<string[]>("allowedCommands") || []
+		const allowedCommands = vscode.workspace.getConfiguration("iivd").get<string[]>("allowedCommands") || []
 
 		const cwd = vscode.workspace.workspaceFolders?.map((folder) => folder.uri.fsPath).at(0) || ""
 

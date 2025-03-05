@@ -21,7 +21,7 @@ export class ConfigManager {
 		},
 	}
 
-	private readonly SCOPE_PREFIX = "roo_cline_config_"
+	private readonly SCOPE_PREFIX = "iivd_config_"
 	private readonly context: ExtensionContext
 
 	constructor(context: ExtensionContext) {

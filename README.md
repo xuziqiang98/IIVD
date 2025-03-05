@@ -1,11 +1,9 @@
 # IIVD
 
-**IIVD** is **I**mplementation **I**nconsistency **V**ulnerability **D**etector. It can:
+**IIVD** is **I**mplementation **I**nconsistency **V**ulnerability **D**etector, which forked from **Roo Code**. It can:
 
 - Analyse and extract field constraints and FSM transitions from rfcs.
 - Detect inconsistency bugs in concreate implementation.
-
-Whether you’re seeking a flexible coding partner, a system architect, or specialized roles like a QA engineer or product manager, Roo Code can help you build software more efficiently.
 
 ## Local Setup & Development
 

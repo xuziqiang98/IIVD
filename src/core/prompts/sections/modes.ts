@@ -20,11 +20,11 @@ ${allModes.map((mode: ModeConfig) => `  * "${mode.name}" mode (${mode.slug}) - $
 
 - Custom modes can be configured in two ways:
   1. Globally via '${customModesPath}' (created automatically on startup)
-  2. Per-workspace via '.roomodes' in the workspace root directory
+  2. Per-workspace via '.iivdmodes' in the workspace root directory
 
-  When modes with the same slug exist in both files, the workspace-specific .roomodes version takes precedence. This allows projects to override global modes or define project-specific modes.
+  When modes with the same slug exist in both files, the workspace-specific .iivdmodes version takes precedence. This allows projects to override global modes or define project-specific modes.
 
-  If asked to create a project mode, create it in .roomodes in the workspace root. If asked to create a global mode, use the global custom modes file.
+  If asked to create a project mode, create it in .iivdmodes in the workspace root. If asked to create a global mode, use the global custom modes file.
 
 - The following fields are required and must not be empty:
   * slug: A valid slug (lowercase letters, numbers, and hyphens). Must be unique, and shorter is better.
@@ -42,7 +42,7 @@ Both files should follow this structure:
    {
      "slug": "designer", // Required: unique slug with lowercase letters, numbers, and hyphens
      "name": "Designer", // Required: mode display name
-     "roleDefinition": "You are Roo, a UI/UX expert specializing in design systems and frontend development. Your expertise includes:\\n- Creating and maintaining design systems\\n- Implementing responsive and accessible web interfaces\\n- Working with CSS, HTML, and modern frontend frameworks\\n- Ensuring consistent user experiences across platforms", // Required: non-empty
+     "roleDefinition": "You are IIVD, a UI/UX expert specializing in design systems and frontend development. Your expertise includes:\\n- Creating and maintaining design systems\\n- Implementing responsive and accessible web interfaces\\n- Working with CSS, HTML, and modern frontend frameworks\\n- Ensuring consistent user experiences across platforms", // Required: non-empty
      "groups": [ // Required: array of tool groups (can be empty)
        "read",    // Read files group (read_file, search_files, list_files, list_code_definition_names)
        "edit",    // Edit files group (apply_diff, write_to_file) - allows editing any file

@@ -19,8 +19,8 @@ describe("LocalCheckpointService", () => {
 
 	const initRepo = async ({
 		workspaceDir,
-		userName = "Roo Code",
-		userEmail = "support@roocode.com",
+		userName = "IIVD",
+		userEmail = "xxx",
 		testFileName = "test.txt",
 		textFileContent = "Hello, world!",
 	}: {
