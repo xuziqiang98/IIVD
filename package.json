@@ -3,7 +3,7 @@
 	"displayName": "IIVD",
 	"description": "Implementation Inconsistency Vulnerability Detector",
 	"publisher": "xuziqiang",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"icon": "assets/icons/rocket.png",
 	"galleryBanner": {
 		"color": "#617A91",
