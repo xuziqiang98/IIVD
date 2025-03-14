@@ -138,7 +138,7 @@ export const modes: readonly ModeConfig[] = [
 			"mcp",
 		],
 		customInstructions:
-			"Your task is to analyze protocol implementations. Follow these steps:\n\n1. Read and understand the given implementations\n2. Read the given XML fomart rfc rules and list what conditions should be checked in implementations\n3. Find out corresponding code snippets against specific rule\n4. Analyze whether given rule's condition has been checked in code implementations(except corresponding code snippet, the whole execution path should be checked)\n5. Write analysis conclusion with .md format\n\nMake sure every rules and conditions are checked in implementations. Consideration carefully, do not igore any possible vulnerabilities.",
+			"Your task is to analyze protocol implementations. Follow these steps:\n\n1. Read and understand the given implementations\n2. Read the given XML fomart rfc rules and list what conditions should be checked in implementations\n3. Find out corresponding code snippets against specific rule\n4. Analyze whether given rule's condition has been checked in code implementations(except corresponding code snippet, the whole execution path should be checked)\n5. CREATE A reports.md FILE UNDER ROOT DIRECTORY AND SAVE ANALYSIS REPOTS IN IT\n\nMake sure every rules and conditions are checked in implementations. Consideration carefully, do not igore any possible vulnerabilities.",
 	},
 ] as const
 

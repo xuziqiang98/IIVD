@@ -53,7 +53,17 @@ export class OpenAiHandler implements ApiHandler, SingleCompletionHandler {
 		}
 	}
 
-	async *createMessage(systemPrompt: string, messages: Anthropic.Messages.MessageParam[]): ApiStream {
+	/**
+     * 创建并发送消息到 OpenAI API，支持流式响应。
+     * 
+     * 该方法将系统提示和消息历史转换为 OpenAI 格式，并处理 API 响应。
+     * 支持不同的模型类型（如 deepseek-reasoner、ark）和不同的响应格式。
+     * 
+     * @param {string} systemPrompt - 系统提示信息，用于设置 AI 助手的行为和角色
+     * @param {Anthropic.Messages.MessageParam[]} messages - 消息历史记录数组
+     * @yields {ApiStream} 生成器函数，产生包含文本内容、推理过程或使用统计的数据块
+     */
+    async *createMessage(systemPrompt: string, messages: Anthropic.Messages.MessageParam[]): ApiStream {
 		const modelInfo = this.getModel().info
 		const modelUrl = this.options.openAiBaseUrl ?? ""
 		const modelId = this.options.openAiModelId ?? ""
